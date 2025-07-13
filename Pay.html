@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Verification</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    #message {
+      font-size: 1.5rem;
+    }
+    #countdown {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 id="message">⏳ Checking payment...</h2>
+  <p id="countdown">Time remaining: 2:00</p>
+
+  <script>
+    const sessionId = new URLSearchParams(window.location.search).get('session_id');
+    const messageEl = document.getElementById('message');
+    const countdownEl = document.getElementById('countdown');
+
+    let timeLeft = 120; // 2 minutes in seconds
+    let paymentChecked = false;
+
+    // Countdown display
+    const countdownTimer = setInterval(() => {
+      timeLeft--;
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      countdownEl.textContent = `Time remaining: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+      if (timeLeft <= 0) {
+        clearInterval(countdownTimer);
+      }
+    }, 1000);
+
+    // Check payment status from backend after 2 Minutes
+    async function checkPayment() {
+      if (!sessionId) {
+        messageEl.textContent = "❌ Payment Not Recieved.";
+        clearInterval(interval);
+        clearTimeout(timeout);
+        return;
+      }
+
+      try {
+        const res = await fetch(`http://localhost:4242/verify-payment?session_id=${sessionId}`);
+        const data = await res.json();
+
+        if (data.status === 'paid') {
+          paymentChecked = true;
+          messageEl.textContent = "✅ Payment received. Thank you!";
+          countdownEl.style.display = 'none';
+          clearInterval(interval);
+          clearTimeout(timeout);
+          clearInterval(countdownTimer);
+        }
+      } catch (err) {
+        console.error("Error checking payment:", err);
+      }
+    }
+
+    // Poll every 2 Minutes
+    const interval = setInterval(() => {
+      if (!paymentChecked) checkPayment();
+    }, 10000);
+
+    // Timeout after 2 minutes
+    const timeout = setTimeout(() => {
+      if (!paymentChecked) {
+        messageEl.textContent = "❌ Payment not received after 2 minutes.";
+        countdownEl.style.display = 'none';
+        clearInterval(interval);
+      }
+    }, 120000);
+  </script>
+
+</body>
+</html>

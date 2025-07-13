@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Token ID</title>
+</head>
+
+<style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      margin: 0; padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: greenyellow;
+      padding: 40px 50px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      width: 380px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin: 15px 0 5px 0;
+      font-weight: 600;
+      color: #444;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+      outline-offset: 2px;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus {
+      border-color: #007bff;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 14px 0;
+      width: 100%;
+      background: green;
+      border: none;
+      border-radius: 8px;
+      color: black;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    /* Modal styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 20px;
+      padding: 40px 30px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    .modal .checkmark {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 25px auto;
+      border-radius: 50%;
+      background-color: #28a745;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal .checkmark svg {
+      width: 40px;
+      height: 40px;
+      stroke: white;
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .modal h2 {
+      margin: 0 0 15px 0;
+      font-weight: 700;
+      color: #28a745;
+      font-size: 26px;
+    }
+
+    .modal p {
+      font-size: 18px;
+      color: #333;
+      margin: 0;
+    }
+
+    .modal button {
+      margin-top: 25px;
+      padding: 12px 0;
+      width: 100%;
+      background: #007bff;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .modal button:hover {
+      background: green;
+    }
+
+     #error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  </style>
+
+<body>
+
+    <div>
+        <ul>
+        <h1>One time payment here!</h1>
+        <h2><b>Account Number:</b> 9130099825</h2>
+        <h2><b>Account Name:</b> Adebayo Rasheedat Aderonke</h2>
+        <h2><b>Bank:</b> Opay</h2>
+
+        
+        <input type="text" id="email" placeholder="Email Address" autocomplete="on" required />
+  <input type="text" id="name" placeholder="Full Name" autocomplete="on" required/>
+  <button id="pay">Confirm Payment</button>
+  <div id="error-message"></div>
+        </ul>
+    </div>
+
+    <script>
+      const emailInput = document.getElementById('email');
+    const nameInput = document.getElementById('name');
+      const pay = document.getElementById('pay');
+       const errorMessage = document.getElementById('error-message');
+
+      pay.addEventListener('click', function() {
+      const enteredemail = emailInput.value.trim();
+      const enteredname = nameInput.value.trim();
+      
+      if (enteredemail && enteredname) {
+
+        // Redirect to Pay page (change URL as needed)
+        window.location.href = 'Pay.html';
+      } else {
+        errorMessage.textContent = 'Input Your email and name before you proceed';
+      }
+       });
+  
+</script>
+</body>
+</html>

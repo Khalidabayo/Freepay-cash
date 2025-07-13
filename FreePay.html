@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreePay</title>
+    <link rel="stylesheet" href="FreePay.css">
+    <link rel="stylesheet" href="FreePay.js">
+    <link rel="stylesheet" href="widthraw successful.html">
+</head>
+<body>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0; padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f9f9f9;
+  }
+
+  #login-container {
+    max-width: 320px;
+    padding: 30px 40px;
+    border: 1px solid greenyellow;
+    border-radius: 6px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    background: greenyellow;
+  }
+
+  #login-container h2 {
+    margin-top: 0;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    background: #007BFF;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #0056b3;
+  }
+
+  #error-message {
+    color: red;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div id="login-container">
+     <h1 style="justify-self: center;">FreePay</h1>
+  <h2>Login</h2>
+  <input type="text" id="username" placeholder="Username" autocomplete="off" />
+  <input type="password" id="token" placeholder="Token ID" autocomplete="off" />
+  <button id="login-btn">Login</button>
+  <div id="error-message"></div>
+  <a href="Purchase Token ID.html" style="justify-self: left;">Purchase Token ID</a>
+  <h4>
+  <a href="https://wa.me/8141407902" style="justify-self: right;">Contact Us</a>
+  </h4>
+</div>
+
+<script>
+  (function() {
+    const requiredUsername = 'Khalidabayo';
+    const requiredToken = 'Lacicoya02#';
+
+    const usernameInput = document.getElementById('username');
+    const tokenInput = document.getElementById('token');
+    const loginBtn = document.getElementById('login-btn');
+    const errorMessage = document.getElementById('error-message');
+
+    loginBtn.addEventListener('click', function() {
+      const enteredUsername = usernameInput.value.trim();
+      const enteredToken = tokenInput.value.trim();
+
+      if (enteredUsername === requiredUsername && enteredToken === requiredToken) {
+        // Save credentials
+        localStorage.setItem('username', enteredUsername);
+        localStorage.setItem('token', enteredToken);
+        errorMessage.textContent = '';
+
+        // Redirect to Widthraw Successful page (change URL as needed)
+        window.location.href = 'widthraw successful.html';
+      } else {
+        errorMessage.textContent = 'Access denied: Username or Token ID is incorrect.';
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>

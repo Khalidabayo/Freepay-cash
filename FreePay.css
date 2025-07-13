@@ -1,0 +1,17 @@
+body{
+    color: black;
+    background-color: greenyellow;
+    justify-self: center;
+}
+h1{
+    color: black;
+}
+h4{
+    justify-self: right;
+}
+a{
+    justify-self: left;
+}
+button{
+    background-color: green;
+}
